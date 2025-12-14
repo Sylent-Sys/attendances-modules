@@ -3,6 +3,7 @@ import { sql, closeConnection } from "../lib/db";
 import { promises as fs } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
+import { pathToFileURL } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -94,8 +95,9 @@ async function executeMigration(
   filename: string
 ): Promise<boolean> {
   try {
+    const importUrl = pathToFileURL(filePath).href;
     // Use dynamic import
-    const module = await import(`file://${filePath}`);
+    const module = await import(importUrl);
     const upFunction = module.up;
 
     if (typeof upFunction !== "function") {
