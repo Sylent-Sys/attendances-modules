@@ -31,6 +31,11 @@ export abstract class EmployeeService {
     return normalizeEmployeeRow(res[0])
   }
 
+  static async getByUserId(user_id: number) {
+    const res = await sql`SELECT id, user_id, resident_id, employee_number, name, position, region_id, is_active, created_at, updated_at FROM employees WHERE user_id = ${user_id} LIMIT 1`
+    return normalizeEmployeeRow(res[0])
+  }
+
   static async create(payload: CreateEmployeeBody) {
     const { employee_number, name, position, resident_id, region_id, is_active } = payload
 

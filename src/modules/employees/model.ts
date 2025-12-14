@@ -5,6 +5,7 @@ export const EmployeeModel = {
   createBody: t.Object({
     employee_number: t.String(),
     name: t.String(),
+    user_id: t.Optional(t.Numeric()),
     position: t.Optional(t.String()),
     resident_id: t.Optional(t.Numeric()),
     region_id: t.Optional(t.Numeric()),
@@ -14,6 +15,7 @@ export const EmployeeModel = {
   updateBody: t.Object({
     employee_number: t.Optional(t.String()),
     name: t.Optional(t.String()),
+    user_id: t.Optional(t.Numeric()),
     position: t.Optional(t.String()),
     resident_id: t.Optional(t.Numeric()),
     region_id: t.Optional(t.Numeric()),
@@ -22,6 +24,7 @@ export const EmployeeModel = {
 
   response: t.Object({
     id: t.Numeric(),
+    user_id: t.Optional(t.Numeric()),
     resident_id: t.Optional(t.Numeric()),
     employee_number: t.String(),
     name: t.String(),

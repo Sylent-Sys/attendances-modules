@@ -24,6 +24,19 @@ export const employees = new Elysia({ prefix: '/employees' })
     }
   })
 
+  .get('/user/:user_id', async ({ params }) => {
+    const id = Number(params.user_id)
+    const employee = await EmployeeService.getByUserId(id)
+
+    if (!employee) return { status: 404, body: { error: 'Not found' } }
+
+    return employee
+  }, {
+    response: {
+      200: EmployeeModel.response
+    }
+  })
+
   .post('/', async ({ body }) => {
     const created = await EmployeeService.create(body as any)
     return created
